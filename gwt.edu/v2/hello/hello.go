@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 const (
 	englishHelloPrefix = "Hello, "
@@ -20,9 +23,13 @@ const (
 )
 
 func Hello(name string, language string) string {
+	prefix := greetingPrefix(language)
 
-	prefix := englishHelloPrefix
+	name = nameOrDefault(name, language)
+	return prefix + name
+}
 
+func greetingPrefix(language string) (prefix string) {
 	switch language {
 	case norwegianBokmal:
 		prefix = norwegianBokmalHelloPrefix
@@ -30,24 +37,44 @@ func Hello(name string, language string) string {
 		prefix = frenchHelloPrefix
 	case spanish:
 		prefix = spanishHelloPrefix
+	default:
+		prefix = englishHelloPrefix
 	}
+	return
+}
 
+func nameOrDefault(name, language string) (displayName string) {
+	displayName = name
 	if name == "" {
 		switch language {
 		case norwegianBokmal:
-			name = norwegianBokmalDefaultName
+			displayName = norwegianBokmalDefaultName
 		case french:
-			name = frenchDefaultName
+			displayName = frenchDefaultName
 		case spanish:
-			name = spanishDefaultName
+			displayName = spanishDefaultName
 		default:
-			name = englishDefaultName
+			displayName = englishDefaultName
 		}
 	}
+	return
+}
 
-	return prefix + name
+func parseArgs() (args []string) {
+	args = os.Args[1:]
+	if len(args) == 0 {
+		args = append(args, "")
+		args = append(args, "")
+	}
+	if len(args) == 1 {
+		args = append(args, "")
+	}
+	return
 }
 
 func main() {
-	fmt.Println(Hello("World", ""))
+	args := parseArgs()
+	name := args[0]
+	lang := args[1]
+	fmt.Println(Hello(name, lang))
 }

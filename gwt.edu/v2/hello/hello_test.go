@@ -1,6 +1,9 @@
 package main
 
-import "testing"
+import (
+	"os"
+	"testing"
+)
 
 func TestHello(t *testing.T) {
 	t.Run("say hello to someone", func(t *testing.T) {
@@ -49,9 +52,46 @@ func TestHello(t *testing.T) {
 	})
 }
 
+func TestParseArg(t *testing.T) {
+	t.Run("name and lang", func(t *testing.T) {
+		// mess with args, save first https://stackoverflow.com/a/33723649
+		originalArgs := os.Args
+		defer func() { os.Args = originalArgs }()
+		os.Args = []string{"hello.go", "Juan", "es"}
+		want := []string{"Juan", "es"}
+		got := parseArgs()
+		assertCorrectArgs(t, got, want)
+	})
+	t.Run("name only", func(t *testing.T) {
+		originalArgs := os.Args
+		defer func() { os.Args = originalArgs }()
+		os.Args = []string{"hello.go", "Bob"}
+		want := []string{"Bob", ""}
+		got := parseArgs()
+		assertCorrectArgs(t, got, want)
+	})
+	t.Run("empty args", func(t *testing.T) {
+		originalArgs := os.Args
+		defer func() { os.Args = originalArgs }()
+		os.Args = []string{"hello.go"}
+		want := []string{"", ""}
+		got := parseArgs()
+		assertCorrectArgs(t, got, want)
+	})
+}
+
 func assertCorrectMessage(t testing.TB, got, want string) {
 	t.Helper() // makes the stack trace point to the caller
 	if got != want {
 		t.Errorf("got %q want %q", got, want)
 	}
+}
+
+func assertCorrectArgs(t testing.TB, got, want []string) {
+	t.Helper()
+	if len(got) != 2 {
+		t.Errorf("got args length %d want %d", len(got), 2)
+	}
+	assertCorrectMessage(t, got[0], want[0])
+	assertCorrectMessage(t, got[1], want[1])
 }
