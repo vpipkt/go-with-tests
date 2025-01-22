@@ -11,6 +11,13 @@ func TestSum(t *testing.T) {
 		assertArraySum(t, expected, got, numbers)
 
 	})
+	t.Run("add up a empty array", func(t *testing.T) {
+		numbers := []int{}
+		expected := 0
+		got := Sum(numbers)
+
+		assertArraySum(t, expected, got, numbers)
+	})
 }
 
 func assertArraySum(t testing.TB, expected, sum int, arr []int) {
