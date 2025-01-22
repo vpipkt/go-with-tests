@@ -2,20 +2,22 @@ package main
 
 import "fmt"
 
-const englishHelloPrefix = "Hello, "
-const englishDefaultName = "World"
+const (
+	englishHelloPrefix = "Hello, "
+	englishDefaultName = "World"
 
-const norwegianBokmal = "nb"
-const norwegianBokmalHelloPrefix = "Hei, "
-const norwegianBokmalDefaultName = "verden"
+	norwegianBokmal            = "nb"
+	norwegianBokmalHelloPrefix = "Hei, "
+	norwegianBokmalDefaultName = "verden"
 
-const french = "fr"
-const frenchHelloPrefix = "Bonjour, "
-const frenchDefaultName = "le monde"
+	french            = "fr"
+	frenchHelloPrefix = "Bonjour, "
+	frenchDefaultName = "le monde"
 
-const spanish = "es"
-const spanishHelloPrefix = "Hola, "
-const spanishDefaultName = "mundo"
+	spanish            = "es"
+	spanishHelloPrefix = "Hola, "
+	spanishDefaultName = "mundo"
+)
 
 func Hello(name string, language string) string {
 
