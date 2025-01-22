@@ -60,16 +60,16 @@ func nameOrDefault(name, language string) (displayName string) {
 	return
 }
 
-func parseArgs() (args []string) {
-	args = os.Args[1:]
-	if len(args) == 0 {
-		args = append(args, "")
-		args = append(args, "")
-	}
-	if len(args) == 1 {
-		args = append(args, "")
-	}
-	return
+func parseArgs() (result [2]string) {
+	// read args from command, omitting program name
+	args := os.Args[1:]
+
+	// set defaults
+	result = [2]string{"", ""}
+
+	// copy args into result
+	copy(result[:], args)
+	return result
 }
 
 func main() {

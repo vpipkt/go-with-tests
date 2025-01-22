@@ -58,7 +58,7 @@ func TestParseArg(t *testing.T) {
 		originalArgs := os.Args
 		defer func() { os.Args = originalArgs }()
 		os.Args = []string{"hello.go", "Juan", "es"}
-		want := []string{"Juan", "es"}
+		want := [2]string{"Juan", "es"}
 		got := parseArgs()
 		assertCorrectArgs(t, got, want)
 	})
@@ -66,7 +66,7 @@ func TestParseArg(t *testing.T) {
 		originalArgs := os.Args
 		defer func() { os.Args = originalArgs }()
 		os.Args = []string{"hello.go", "Bob"}
-		want := []string{"Bob", ""}
+		want := [2]string{"Bob", ""}
 		got := parseArgs()
 		assertCorrectArgs(t, got, want)
 	})
@@ -74,7 +74,7 @@ func TestParseArg(t *testing.T) {
 		originalArgs := os.Args
 		defer func() { os.Args = originalArgs }()
 		os.Args = []string{"hello.go"}
-		want := []string{"", ""}
+		want := [2]string{"", ""}
 		got := parseArgs()
 		assertCorrectArgs(t, got, want)
 	})
@@ -87,7 +87,7 @@ func assertCorrectMessage(t testing.TB, got, want string) {
 	}
 }
 
-func assertCorrectArgs(t testing.TB, got, want []string) {
+func assertCorrectArgs(t testing.TB, got [2]string, want [2]string) {
 	t.Helper()
 	if len(got) != 2 {
 		t.Errorf("got args length %d want %d", len(got), 2)
