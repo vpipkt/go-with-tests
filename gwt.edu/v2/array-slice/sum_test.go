@@ -58,6 +58,16 @@ func TestSumAll(t *testing.T) {
 	})
 }
 
+func ExampleSumAll() {
+	a := []int{1, 3, 5}
+	b := []int{2, 4, 6}
+	c := []int{42}
+
+	sum := SumAll(a, b, c)
+	fmt.Print(sum)
+	// Output: [9 12 42]
+}
+
 func BenchmarkSum(b *testing.B) {
 	arr := []int{4, 5, 6, 7, 8, 9, 12, 15, 18}
 	for range b.N {
