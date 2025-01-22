@@ -7,3 +7,11 @@ func Sum(a []int) int {
 	}
 	return result
 }
+
+func SumAll(xs ...[]int) []int {
+	accumulator := make([]int, len(xs))
+	for i, v := range xs {
+		accumulator[i] = Sum(v)
+	}
+	return accumulator
+}
