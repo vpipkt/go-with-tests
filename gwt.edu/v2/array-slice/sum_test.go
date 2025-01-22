@@ -38,6 +38,13 @@ func ExampleSum() {
 	// Output: 9
 }
 
+func BenchmarkSum(b *testing.B) {
+	arr := []int{4, 5, 6, 7, 8, 9, 12, 15, 18}
+	for range b.N {
+		Sum(arr)
+	}
+}
+
 func TestSumAll(t *testing.T) {
 	t.Run("two slices summed", func(t *testing.T) {
 		a := []int{1, 2, 3}
@@ -68,9 +75,32 @@ func ExampleSumAll() {
 	// Output: [9 12 42]
 }
 
-func BenchmarkSum(b *testing.B) {
-	arr := []int{4, 5, 6, 7, 8, 9, 12, 15, 18}
-	for range b.N {
-		Sum(arr)
+func TestSumAllTails(t *testing.T) {
+	checkSums := func(t testing.TB, got, want []int) {
+		t.Helper()
+		if !slices.Equal(got, want) {
+			t.Errorf("expected %v got %v for sumtails", got, want)
+		}
+
 	}
+	t.Run("sum normal slice tails", func(t *testing.T) {
+		a := []int{1, 3, 5}
+		b := []int{2, 4, 6}
+		c := []int{42}
+		expected := []int{8, 10, 0}
+		result := SumAllTails(a, b, c)
+		checkSums(t, result, expected)
+	})
+
+	t.Run("sum empty slice tails", func(t *testing.T) {
+		empty := []int{}
+		expected := []int{0, 0, 0}
+		result := SumAllTails(empty, empty, empty)
+		checkSums(t, result, expected)
+	})
+	t.Run("sum no slice tails", func(t *testing.T) {
+		expected := []int{}
+		result := SumAllTails()
+		checkSums(t, result, expected)
+	})
 }
