@@ -13,6 +13,10 @@ const french = "fr"
 const frenchHelloPrefix = "Bonjour, "
 const frenchDefaultName = "le monde"
 
+const spanish = "es"
+const spanishHelloPrefix = "Hola, "
+const spanishDefaultName = "mundo"
+
 func Hello(name string, language string) string {
 
 	prefix := englishHelloPrefix
@@ -22,6 +26,8 @@ func Hello(name string, language string) string {
 		prefix = norwegianBokmalHelloPrefix
 	case french:
 		prefix = frenchHelloPrefix
+	case spanish:
+		prefix = spanishHelloPrefix
 	}
 
 	if name == "" {
@@ -30,6 +36,8 @@ func Hello(name string, language string) string {
 			name = norwegianBokmalDefaultName
 		case french:
 			name = frenchDefaultName
+		case spanish:
+			name = spanishDefaultName
 		default:
 			name = englishDefaultName
 		}
