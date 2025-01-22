@@ -4,13 +4,16 @@ import "fmt"
 
 const englishHelloPrefix = "Hello, "
 
+const norwegianBokmal = "nb"
+const norwegianBokmalHelloPrefix = "Hei, "
+
 func Hello(name string, language string) string {
 	if name == "" {
 		name = "World"
 	}
 
-	if language == "nb" {
-		return "Hei, " + name
+	if language == norwegianBokmal {
+		return norwegianBokmalHelloPrefix + name
 	}
 
 	// default or unknown language: en
