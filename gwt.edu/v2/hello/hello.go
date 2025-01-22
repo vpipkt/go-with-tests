@@ -9,21 +9,33 @@ const norwegianBokmal = "nb"
 const norwegianBokmalHelloPrefix = "Hei, "
 const norwegianBokmalDefaultName = "verden"
 
+const french = "fr"
+const frenchHelloPrefix = "Bonjour, "
+const frenchDefaultName = "le monde"
+
 func Hello(name string, language string) string {
 
-	if language == norwegianBokmal {
-		if name == "" {
-			name = norwegianBokmalDefaultName
-		}
-		return norwegianBokmalHelloPrefix + name
+	prefix := englishHelloPrefix
+
+	switch language {
+	case norwegianBokmal:
+		prefix = norwegianBokmalHelloPrefix
+	case french:
+		prefix = frenchHelloPrefix
 	}
 
-	// default or unknown language: en
 	if name == "" {
-		name = englishDefaultName
+		switch language {
+		case norwegianBokmal:
+			name = norwegianBokmalDefaultName
+		case french:
+			name = frenchDefaultName
+		default:
+			name = englishDefaultName
+		}
 	}
 
-	return englishHelloPrefix + name
+	return prefix + name
 }
 
 func main() {
