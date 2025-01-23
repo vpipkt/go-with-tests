@@ -7,11 +7,11 @@ import (
 func TestWallet(t *testing.T) {
 
 	wallet := Wallet{}
-	wallet.Deposit(10)
+	wallet.Deposit(Mycoin(10))
 
 	got := wallet.Balance()
 
-	want := 10
+	want := Mycoin(10)
 
 	if got != want {
 		t.Errorf("got '%d' want '%d'", got, want)
