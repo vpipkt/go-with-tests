@@ -28,21 +28,21 @@ func TestPerimter(t *testing.T) {
 func TestArea(t *testing.T) {
 	// slice of anonymous struct, for table driven tests
 	areaTest := []struct {
-		shape Shape
-		want  float64
-		eps   float64
+		shape   Shape
+		hasArea float64
+		eps     float64
 	}{
-		{Rectangle{9.0, 9.0}, 81.0, 0.0},
-		{Rectangle{2.0, 1.25}, 2.5, 0.0},
-		{Circle{10.0}, 314.1592653589793, 1e-18},
-		{Circle{1.25}, 4.908738521, 1e-8},
-		{Triangle{3, 2.5}, 3.75, 0.0},
+		{shape: Rectangle{Width: 9.0, Height: 9.0}, hasArea: 81.0, eps: 0.0},
+		{shape: Rectangle{Width: 2.0, Height: 1.25}, hasArea: 2.5, eps: 0.0},
+		{shape: Circle{Radius: 10.0}, hasArea: 314.1592653589793, eps: 1e-18},
+		{shape: Circle{Radius: 1.25}, hasArea: 4.908738521, eps: 1e-8},
+		{shape: Triangle{Base: 3, Height: 2.5}, hasArea: 3.75, eps: 0.0},
 	}
 
 	for _, tt := range areaTest {
 		got := tt.shape.Area()
-		if math.Abs(got-tt.want) > tt.eps {
-			t.Errorf("got '%g' want '%g'", got, tt.want)
+		if math.Abs(got-tt.hasArea) > tt.eps {
+			t.Errorf("%#v got '%g' hasArea '%g'", tt.shape, got, tt.hasArea)
 		}
 	}
 }
