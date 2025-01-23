@@ -23,27 +23,20 @@ func TestPerimter(t *testing.T) {
 }
 
 func TestArea(t *testing.T) {
-
-	checkArea := func(t testing.TB, shape Shape, want float64) {
-		t.Helper()
-		got := shape.Area()
-		if got != want {
-			t.Errorf("got '%g' want '%g'", got, want)
-		}
+	// slice of anonymous struct, for table driven tests
+	areaTest := []struct {
+		shape Shape
+		want  float64
+	}{
+		{Rectangle{9.0, 9.0}, 81.0},
+		{Rectangle{2.0, 1.25}, 2.5},
+		{Circle{10.0}, 314.1592653589793},
 	}
 
-	t.Run("square", func(t *testing.T) {
-		r := Rectangle{9.0, 9.0}
-		checkArea(t, r, 81.0)
-	})
-	t.Run("rect", func(t *testing.T) {
-		r := Rectangle{2.0, 1.25}
-		checkArea(t, r, 2.5)
-	})
-	t.Run("circle", func(t *testing.T) {
-		c := Circle{10.}
-		expected := 314.1592653589793
-		checkArea(t, c, expected)
-
-	})
+	for _, tt := range areaTest {
+		got := tt.shape.Area()
+		if got != tt.want {
+			t.Errorf("got '%g' want '%g'", got, tt.want)
+		}
+	}
 }
