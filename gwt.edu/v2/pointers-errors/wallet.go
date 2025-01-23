@@ -23,7 +23,7 @@ func (w *Wallet) Balance() Mycoin {
 	return w.balance
 }
 
-var ErrInsufficientFunds = errors.New("User has insufficient funds for withdrawal requested")
+var ErrInsufficientFunds = errors.New("user has insufficient funds for withdrawal requested")
 
 func (w *Wallet) Withdraw(amount Mycoin) error {
 	if amount > w.balance {
