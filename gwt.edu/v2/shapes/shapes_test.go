@@ -24,31 +24,26 @@ func TestPerimter(t *testing.T) {
 
 func TestArea(t *testing.T) {
 
-	// checkArea := func(t testing.TB, shape Shape, want float64)
+	checkArea := func(t testing.TB, shape Shape, want float64) {
+		t.Helper()
+		got := shape.Area()
+		if got != want {
+			t.Errorf("got '%g' want '%g'", got, want)
+		}
+	}
 
 	t.Run("square", func(t *testing.T) {
 		r := Rectangle{9.0, 9.0}
-		result := r.Area()
-		expected := 81.0
-		if result != expected {
-			t.Errorf("expected %f got %f", expected, result)
-		}
+		checkArea(t, r, 81.0)
 	})
 	t.Run("rect", func(t *testing.T) {
 		r := Rectangle{2.0, 1.25}
-		result := r.Area()
-		expected := 2.5
-		if result != expected {
-			t.Errorf("expected %f got %f", expected, result)
-		}
+		checkArea(t, r, 2.5)
 	})
 	t.Run("circle", func(t *testing.T) {
 		c := Circle{10.}
 		expected := 314.1592653589793
-		result := c.Area()
-		if result != expected {
-			t.Errorf("got '%g' want '%f", result, expected)
-		}
+		checkArea(t, c, expected)
 
 	})
 }
