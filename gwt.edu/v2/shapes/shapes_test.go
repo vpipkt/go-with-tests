@@ -1,6 +1,9 @@
 package shapes
 
-import "testing"
+import (
+	"math"
+	"testing"
+)
 
 func TestPerimter(t *testing.T) {
 	t.Run("square", func(t *testing.T) {
@@ -27,15 +30,18 @@ func TestArea(t *testing.T) {
 	areaTest := []struct {
 		shape Shape
 		want  float64
+		eps   float64
 	}{
-		{Rectangle{9.0, 9.0}, 81.0},
-		{Rectangle{2.0, 1.25}, 2.5},
-		{Circle{10.0}, 314.1592653589793},
+		{Rectangle{9.0, 9.0}, 81.0, 0.0},
+		{Rectangle{2.0, 1.25}, 2.5, 0.0},
+		{Circle{10.0}, 314.1592653589793, 1e-18},
+		{Circle{1.25}, 4.908738521, 1e-8},
+		{Triangle{3, 2.5}, 3.75, 0.0},
 	}
 
 	for _, tt := range areaTest {
 		got := tt.shape.Area()
-		if got != tt.want {
+		if math.Abs(got-tt.want) > tt.eps {
 			t.Errorf("got '%g' want '%g'", got, tt.want)
 		}
 	}
