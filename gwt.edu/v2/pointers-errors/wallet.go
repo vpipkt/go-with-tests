@@ -1,6 +1,12 @@
 package wallet
 
+import "fmt"
+
 type Mycoin int
+
+func (m Mycoin) String() string {
+	return fmt.Sprintf("%d MYC", m)
+}
 
 type Wallet struct {
 	balance Mycoin
