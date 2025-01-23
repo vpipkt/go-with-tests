@@ -23,6 +23,9 @@ func TestPerimter(t *testing.T) {
 }
 
 func TestArea(t *testing.T) {
+
+	// checkArea := func(t testing.TB, shape Shape, want float64)
+
 	t.Run("square", func(t *testing.T) {
 		r := Rectangle{9.0, 9.0}
 		result := r.Area()
@@ -40,8 +43,8 @@ func TestArea(t *testing.T) {
 		}
 	})
 	t.Run("circle", func(t *testing.T) {
-		c := Circle{1.25}
-		expected := 4.9087
+		c := Circle{10.}
+		expected := 314.1592653589793
 		result := c.Area()
 		if result != expected {
 			t.Errorf("got '%g' want '%f", result, expected)
